@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+           .Nakhul1{
+            color: aliceblue;
+        }
+        .Nakhul{
+         background-color: azure;
+         width:420px;
+         height: 200px;
+         border-radius: 13px;
+        }
+        td{
+         font-size: 25px;
+         padding: 9px;
+        }
+        input
+        {
+         border-radius: 12px;
+         height: 25px;
+        }
+        #Index{
+         margin-top: 35px;
+        }
+         </style>
+</head>
+<body background="8.jpg">
+    <center>
+        <div class="Nakhul">
+    <table>
+        <tr>
+            <td><label type="name">Arrival Time</label></td>
+            <td><input type="text" id="project" placeholder="Enter Arrival Process"></td>
+            </tr>
+        
+            <tr>
+            <td><label type="name">Burst Time</label></td>
+            <td><input type="text" id="project1" placeholder="Enter Brust Time"></td>
+            </tr>
+         
+      
+    
+    </table>
+    <input type="submit" value="Click Here" id="Nakhul" onclick="myfun()">
+    </div>
+    <table id="Nakhul" border="1" style="color: white;">
+        <td class="Nakhul1">Processes</td>
+        <td class="Nakhul1">Arrival</td>
+        <td class="Nakhul1">Burst time</td>
+        <td class="Nakhul1">Waiting time</td>
+        <td class="Nakhul1">Turn around time</td>
+        <tbody id="Nakhul1">
+    </tbody>
+    </table>
+    <p id="1" class="Nakhul1">Waiting Time :</p>
+    <p id="2" class="Nakhul1">Turn Around Time :</p>
+    <script>
+        function myfun()
+        {
+         var test = document.getElementById("project").value;
+         var processes=test.split(",");
+         var res = processes.map(Number);
+         var  n = processes.length;
+         var test1=document.getElementById("project1").value;
+         var burst_time2=test1.split(",");
+         var res1 = burst_time2.map(Number);
+         var a=res;
+         var b=res1;
+         var x=new Array(res.length);
+         var i=0,j,smallest,count=0,time,avg1,tt1;
+         var avg,tt,end,k=0;
+         for(i=0;i<res.length;i++)
+          x[i]=b[i]; 
+    
+         b[9]=9999;
+         for(time=0;count!=n;time++)
+            {
+            smallest=9;
+            for(i=0;i<n;i++)
+            {
+            if(a[i]<=time && b[i]<b[smallest] && b[i]>0 )
+            smallest=i;
+            }
+            b[smallest]--;
+            if(b[smallest]==0)
+            {
+            count++;
+            end=time+1;
+            var table=document.getElementById("Nakhul1");
+            avg=end-a[smallest]-x[smallest];
+            tt=end-a[smallest];
+           
+            avg1=avg1+avg;
+            tt1=tt1+tt;
+            k++;
+            var row=
+                  `<tr>
+                    <td>${(k)}</td>
+                    <td>${a[smallest]}</td>
+                    <td>${x[smallest]}</td>
+                    <td>${avg}</td>
+                    <td>${tt}</td>
+                 </tr>`
+                 table.innerHTML += row
+            }   
+            }  
+            document.getElementById("1").innerHTML= "Waiting Time"+( avg1);
+            document.getElementById("2").innerHTML="Turn Around Time:"+(tt1);
+        }
+    </script>
+</body>
+</center>
+</html>

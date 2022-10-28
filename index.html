@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        margin: 0px;
+      }
+      .box1 {
+        width: 100%;
+        height: 80px;
+        padding: 0px;
+        background: black;
+        overflow: auto;
+      }
+      ul {
+        padding: 10px;
+        margin: 5px;
+      }
+      li {
+        float: left;
+        font-size: 25px;
+      }
+      .box1 a {
+        width: 50px;
+        display: block;
+        padding: 15px 200px;
+        text-decoration: none;
+        font-family: Arial;
+        color: white;
+        text-align: right;
+      }
+      .box2 {
+        width: 90%;
+        margin-left: 80px;
+        margin-right: 80px;
+        margin-top: 1%;
+        margin-bottom: 2%;
+        height: 60%;      
+        border-width: 4px;
+        border-color: black;
+        border-style: solid;
+      }
+      .head1 {
+        font-size: 30px;
+          font-family: Arial;
+         text-align: center;      }
+
+      .box2 p{
+        font-size: 28px;
+        font-family: Arial;
+        left :10px;      }
+        .box2 h1{
+          font-size: 40px;
+          font-family: Arial;
+         text-align: center;
+        }
+  .button
+        {
+          
+              padding-bottom: 20%;
+              border: none;
+              color: white;
+              padding: 5px 10px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 25px;
+              margin: 4px 2px;
+              transition-duration: 0.4s;
+              cursor: pointer;
+              margin: 5px;
+              border-radius: 5px;
+        }
+  .button1 {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+.button1:hover {
+  background-color: black;
+  color: white;
+}
+.button2 {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+.bts2
+{
+  text-align: center;
+}
+
+.button:hover {
+  background-color: grey;
+  color: white;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+    </style>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Income Tax Department Of India</title>
+  </head>
+  <body background="6.webp">
+    <div class="box1">
+      <ul>
+        <li><a href="RB.HTML">RB</a></li>
+        <li></li>
+        <li><a href="SJF.HTML">SJF</a></li>
+        <li><a href="SRTF.HTML">SRTF</a></li>
+      </ul>
+    </div>
+    <div class="head1">
+      <h1><center>CPU SCHEDULING ALGORITHM</center></h1>
+    </div>
+
+    <br />
+
+    <div class="box2">
+      <h1>ROUND ROBIN </h1>
+      <p>
+        &#x2022;   Round robin is a pre-emptive algorithm.
+      </p>
+      <p> &#x2022; The CPU is shifted to the next process after fixed interval time, which is called time quantum/time slice.</p>
+      <p> &#x2022; The process that is preempted is added to the end of the queue.</p>
+      <p> &#x2022; Round robin is a hybrid model which is clock-driven</p>
+      <p> &#x2022; Time slice should be minimum, which is assigned for a specific task that needs to be processed. However, it may differ OS to OS. </p>
+      <p> &#x2022; It is a real time algorithm which responds to the event within a specific time limit. </p>
+      <p> &#x2022;  Round robin is one of the oldest, fairest, and easiest algorithm.</p>
+      <p> &#x2022; Widely used scheduling method in traditional OS.</p>
+      <div class="bts2">  
+        <button class="button button1"><a href="https://www.youtube.com/watch?v=-jFGYDfWkXI&t=14s">More Info</a></button>
+        <button  class="button button2"><a href="RB.HTML">Calculator</a></button>
+      </div>        
+      </h1>
+    </div>
+
+    <div class="box2">
+      <h1>SHORTEST JOB FIRST </h1>
+      <p>
+        &#x2022;  SJF algorithm can be preemptive as well as non-preemptive.
+      </p>
+      <p> &#x2022;IN SJF CPU is assigned to the process that has the smallest next CPU Burst time. </p>
+      <p> &#x2022; If the next CPU  Burst of two process is the same then FCFS scheduling is used to break the tie.</p>
+      <p> &#x2022; This process give the minimum average waiting time for a given processes.</p>
+      <p> &#x2022; SJF is more optimal as it reduces average wait time which will increase the throughput. </p>
+ 
+      <div class="bts2">  
+        <button class="button button1"><a href="https://www.youtube.com/watch?v=pYO-FAg-TpQ&t=433s">More Info</a></button>
+        <button  class="button button2"><a href="SJF.HTML">Calculator</a></button>
+      </div>        
+      </h1>
+    </div>
+
+    <div class="box2">
+      <h1>Shortest Remaining Time First </h1>
+      <p>
+        &#x2022; With the help of the SRTF algorithm, the process having the smallest amount of time remaining until completion is selected first to execute.
+      </p>
+      <p> &#x2022;The Preemptive version of Shortest Job First(SJF) scheduling is known as Shortest Remaining Time First (SRTF). </p>
+      <p> &#x2022; So basically in SRTF, the processes are scheduled according to the shortest remaining time. </p>
+      <p> &#x2022;The SRTF algorithm involves more overheads than the Shortest job first (SJF)scheduling, because in SRTF OS is required frequently in order to monitor the CPU time of the jobs in the READY queue and to perform context switching.
+      </p>
+      <p> &#x2022;In the SRTF scheduling algorithm, the execution of any process can be stopped after a certain amount of time. On arrival of every process, the short-term scheduler schedules those processes from the list of available processes & running processes that have the least remaining burst time.
+      </p>
+      <p>&#x2022; After all the processes are available in the ready queue, then, No preemption will be done and then the algorithm will work the same as SJF scheduling. In the Process Control Block, the context of the process is saved, when the process is removed from the execution and when the next process is scheduled. The PCB is accessed on the next execution of this process.
+      </p>
+    
+      <div class="bts2">  
+        <button class="button button1"><a href="https://www.youtube.com/watch?v=_QcX99B-zbU">More Info</a></button>
+        <button  class="button button2"><a href="SRTF.HTML">Calcuator</a></button>
+      </div>        
+      </h1>
+    </div>
+
+
+
+  </body>
+</html>

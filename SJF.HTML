@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .Nakhul1{
+            color: aliceblue;
+        }
+        .Nakhul{
+         background-color: azure;
+         width:420px;
+         height: 200px;
+         border-radius: 13px;
+        }
+        td{
+         font-size: 25px;
+         padding: 9px;
+        }
+        input
+        {
+         border-radius: 12px;
+         height: 25px;
+        }
+        #Index{
+         margin-top: 35px;
+        }
+         </style>
+</head>
+
+<body background="8.jpg">
+      
+      <center>
+        <div class="Nakhul">
+    <table>
+        <tr>
+            <td><label type="name">Arrival Time</label></td>
+            <td><input type="text" id="project" placeholder="Enter Arrival Process"></td>
+            </tr>
+        
+            <tr>
+            <td><label type="name">Burst Time</label></td>
+            <td><input type="text" id="project1" placeholder="Enter Brust Time"></td>
+            </tr>
+         
+            <tr><td></td></tr>
+      
+       
+    </table>
+    <input type="submit" value="Click Here" id="Nakhul" onclick="myfun()">
+    </div>
+    <table id="Nakhul" border="1" style="color: white;">
+        <td class="Nakhul1">Processes</td>
+        <td class="Nakhul1">Arrival</td>
+        <td class="Nakhul1">Burst time</td>
+        <td class="Nakhul1">Waiting time</td>
+        <td class="Nakhul1">Turn around time</td>
+        <tbody id="Nakhul1">
+    </tbody>
+    </table>
+    <p id="1" class="Nakhul1">Waiting time :</p>
+    <p id="2" class="Nakhul1">Turn Around Time :</p>
+    <script>
+      function myfun()
+      {
+      var k=0;
+      var test = document.getElementById("project").value;
+         var processes=test.split(",");
+         var res = processes.map(Number);
+         var  n = processes.length;
+         var test1=document.getElementById("project1").value;
+         let burst_time2=test1.split(",");
+         var res1 = burst_time2.map(Number);
+      var arrival_time=res;
+      var burst_time=burst_time2;
+      var temp=new Array(burst_time.length);
+      var i=0, smallest, count = 0, time, limit=arrival_time.length; 
+      var wait_time = 0, turnaround_time = 0,wait_time1=0,turnaround_time1=0, end;
+      for(i = 0; i < limit; i++)
+      {
+            temp[i] = burst_time[i];
+      }
+      burst_time[9]=9999;
+      for(time = 0; count != limit; time++)
+      {           
+            smallest = 9;
+            for(i = 0; i < limit; i++)
+            {
+                  if(arrival_time[i] <= time && burst_time[i] < burst_time[smallest] && burst_time[i] > 0)
+                  {
+                        smallest = i;
+                  }
+            }
+            burst_time[smallest]--;
+            if(burst_time[smallest] == 0)
+            {     count++;
+                  end = time + 1;
+                  var table=document.getElementById("Nakhul1");
+                  wait_time =  + end - arrival_time[smallest] - temp[smallest];
+                  turnaround_time =  + end - arrival_time[smallest];                 
+                  k++;
+                  wait_time1=wait_time1+wait_time;
+                  turnaround_time1=turnaround_time1+turnaround_time;
+
+                  var row=
+                  `<tr>
+                    <td>${(k)}</td>
+                    <td>${arrival_time[smallest]}</td>
+                    <td>${temp[smallest]}</td>
+                    <td>${wait_time}</td>
+                    <td>${turnaround_time}</td>
+                 </tr>`
+                 table.innerHTML += row
+               
+
+
+            }
+      }
+      average_waiting_time = wait_time1 / limit; 
+      average_turnaround_time = turnaround_time1 / limit;
+      document.getElementById("1").innerHTML= "Waiting Time"+ average_waiting_time;
+      document.getElementById("2").innerHTML="Turn Around Time:"+average_turnaround_time;
+      
+}
+    </script>
+</body>
+</html>

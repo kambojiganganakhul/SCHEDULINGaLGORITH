@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .Nakhul1{
+            color: aliceblue;
+        }
+   .Nakhul{
+    background-color: azure;
+    width:420px;
+    height: 280px;
+    border-radius: 13px;
+   }
+   td{
+    font-size: 25px;
+   }
+
+   input
+   {
+    border-radius: 12px;
+    height: 25px;
+   }
+   #Index{
+    margin-top: 25px;
+   }
+    </style>
+</head>
+<center>
+<body background="8.jpg">
+    <br>
+    <br>
+    <div class="Nakhul">
+    <table>
+        <br>
+        <tr>
+            <td><label type="name">Arrival Time</label></td>
+            <td><input type="text" id="project" placeholder="Enter Arrival Process"></td>
+            </tr>
+         <br>
+            <tr>
+            <td><label type="name">Burst Time</label></td>
+            <td><input type="text" id="project1" placeholder="Enter Brust Time"></td>
+            </tr>
+            <br>
+            <tr>
+            <td> <label>Quanta Number</label></td>
+            <td><input type="text" id="two" placeholder="Enter a number"></td>
+            </tr>
+        
+      
+    
+    </table>
+    <input type="submit" value="Click Here" id="Index" onclick="myfun()">
+</div>
+    <table id="Nakhul" border="1" style="color: white;">
+        <td class="Nakhul1">Processes</td>
+        <td class="Nakhul1">Arrival</td>
+        <td class="Nakhul1">Burst time</td>
+        <td class="Nakhul1">Waiting time</td>
+        <td class="Nakhul1">Turn around time</td>
+        <tbody id="Nakhul1">
+    </tbody>
+    </table>
+    <p id="1" class="Nakhul1">Time Quanta :</p>
+    <p id="2" class="Nakhul1">Number of Processes :</p>
+    <p id="3" class="Nakhul1">Arrival Time of Processes</p>
+    <p id="4" class="Nakhul1">Burst Time of Processes </p>
+    <script>
+     
+ 
+ const queueUpdation = (queue, timer, arrival, n, maxProccessIndex) => {
+             let zeroIndex;
+             for (let i = 0; i < n; i++) {
+                 if (queue[i] == 0) {
+                     zeroIndex = i;
+                     break;
+                 }
+             }
+             queue[zeroIndex] = maxProccessIndex + 1;
+         }
+  
+         const queueMaintainence = (queue, n) => {
+             for (let i = 0; (i < n - 1) && (queue[i + 1] != 0); i++) {
+                 let temp = queue[i];
+                 queue[i] = queue[i + 1];
+                 queue[i + 1] = temp;
+             }
+         }
+  
+         const checkNewArrival = (timer, arrival, n, maxProccessIndex, queue) => {
+             if (timer <= arrival[n - 1]) {
+                 let newArrival = false;
+                 for (let j = (maxProccessIndex + 1); j < n; j++) {
+                     if (arrival[j] <= timer) {
+                         if (maxProccessIndex < j) {
+                             maxProccessIndex = j;
+                             newArrival = true;
+                         }
+                     }
+                 }
+                
+                 if (newArrival)
+                     queueUpdation(queue, timer, arrival, n, maxProccessIndex);
+             }
+         }
+  
+         
+        function myfun()
+       {
+         
+         let timer = 0;
+         let maxProccessIndex = 0;
+         let avgWait = 0;
+         let avgTT = 0;
+         const wait = [];
+         const turn = [];
+         const queue = [];
+         const temp_burst = [];
+         const complete = [];
+         var test = document.getElementById("project").value;
+         var processes=test.split(",");
+         var res = processes.map(Number);
+         var  n = processes.length;
+         var test1=document.getElementById("project1").value;
+         let burst_time=test1.split(",");
+         var res1 = burst_time.map(Number);
+         const arrival = res;
+         const burst = res1;
+         var n = arrival.length;
+         var tq = document.getElementById("two").value;
+         for (let i = 0; i < n; i++) {
+             temp_burst[i] = burst[i];
+         }
+  
+         for (let i = 0; i < n; i++) {    
+             complete[i] = false;
+             queue[i] = 0;
+         }
+         while (timer < arrival[0])    
+             timer++;
+         queue[0] = 1;
+  
+         while (true) {
+         let flag = true;
+             for (let i = 0; i < n; i++) {
+                 if (temp_burst[i] != 0) {
+                     flag = false;
+                     break;
+                 }
+             }
+             if (flag)
+                 break;
+  
+             for (let i = 0; (i < n) && (queue[i] != 0); i++) {
+                 let ctr = 0;
+                 while ((ctr < tq) && (temp_burst[queue[0] - 1] > 0)) {
+                     temp_burst[queue[0] - 1] -= 1;
+                     timer += 1;
+                     ctr++;
+  
+                    
+                     checkNewArrival(timer, arrival, n, maxProccessIndex, queue);
+                 }
+                 
+                 if ((temp_burst[queue[0] - 1] == 0) && (complete[queue[0] - 1] == false)) {
+                     
+                     turn[queue[0] - 1] = timer;
+                     complete[queue[0] - 1] = true;
+                 }
+  
+                 
+                 let idle = true;
+                 if (queue[n - 1] == 0) {
+                     for (let i = 0; i < n && queue[i] != 0; i++) {
+                         if (complete[queue[i] - 1] == false) {
+                             idle = false;
+                         }
+                     }
+                 }
+                 else
+                     idle = false;
+  
+                 if (idle) {
+                     timer++;
+                     checkNewArrival(timer, arrival, n, maxProccessIndex, queue);
+                 }
+  
+               
+                 queueMaintainence(queue, n);
+             }
+         }
+  
+         for (let i = 0; i < n; i++) {
+             turn[i] = turn[i] - arrival[i];
+             wait[i] = turn[i] - burst[i];
+         }
+         
+        
+         var table=document.getElementById("Nakhul1");
+         for (let i = 0; i < n; i++) {
+            var row=
+                `<tr>
+                    <td>${(i+1)}</td>
+                    <td>${arrival[i]}</td>
+                    <td>${burst[i]}</td>
+                    <td>${wait[i]}</td>
+                    <td>${turn[i]}</td>
+                 </tr>`
+                 table.innerHTML += row
+    
+
+         }
+         for (let i = 0; i < n; i++) {
+             avgWait += wait[i];
+             avgTT += turn[i];
+         }
+     
+        document.getElementById("1").innerHTML= "Time Quanta :"+tq;
+        document.getElementById("2").innerHTML="Number of Processes :"+n;
+        document.getElementById("3").innerHTML="Arrival Time of Processes :"+arrival;
+        document.getElementById("4").innerHTML="Burst Time of Processes : "+burst;
+
+       
+        }
+  
+ </script>
+
+
+</body>
+</center>
+</html>
